@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Link Redirect</title>
+</head>
+<body>
+
+    <h2>Enter a code or destination name:</h2>
+    <form id="redirectForm">
+        <input type="text" id="userInput" placeholder="Type here..." required>
+        <button type="submit">Go</button>
+    </form>
+
+    <script>
+        document.getElementById('redirectForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop the form from submitting normally
+            
+            let input = document.getElementById('userInput').value.trim().toLowerCase();
+            let targetUrl = '';
+
+            // Map user input keywords to specific URLs
+            if (input === 'google') {
+                targetUrl = 'https://www.google.com';
+            } else if (input === 'youtube') {
+                targetUrl = 'https://www.youtube.com';
+            } else if (input.startsWith('http://') || input.startsWith('https://')) {
+                targetUrl = input; // Allow direct full URLs if entered
+            } else {
+                alert('Unknown destination. Try "google" or "youtube".');
+                return;
+            }
+
+            // Redirect the user
+            window.location.href = targetUrl;
+        });
+    </script>
+
+</body>
+</html>
